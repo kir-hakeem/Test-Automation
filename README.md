@@ -1,4 +1,4 @@
-## Setting Up the automation test for TernKey:
+## Setting Up the automation test for Nest.js Application:
 
 We will use Cypress for End-to-End Testing (E2E) and Jest for Unit Testing
 
