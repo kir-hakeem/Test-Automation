@@ -1,0 +1,25 @@
+name: Deploy to Develop
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Run Tests
+      run: |
+        # Your test commands here
+        npm install
+        npm test
+
+    - name: Deploy to Develop Environment
+      run: |
+        # Your deployment commands here
+        echo "Deploying to Develop Environment..."
