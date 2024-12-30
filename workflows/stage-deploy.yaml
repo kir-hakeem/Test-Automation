@@ -1,0 +1,19 @@
+name: Deploy to Stage
+
+on:
+  push:
+    branches:
+      - stage
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Deploy to Stage Environment
+      run: |
+        # Your deployment commands here
+        echo "Deploying to Stage Environment..."
