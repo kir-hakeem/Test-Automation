@@ -1,0 +1,33 @@
+name: Merge Develop to Stage and Deploy
+
+on:
+  workflow_run:
+    workflows: ["Deploy to Develop"]
+    types:
+      - completed
+
+jobs:
+  merge-and-deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Configure Git
+      run: |
+        git config --global user.name "${{ secrets.GIT_USER_NAME }}"
+        git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
+
+    - name: Merge Develop into Stage
+      run: |
+        git fetch
+        git checkout stage
+        git merge develop
+        git push origin stage
+
+    - name: Trigger Stage Deployment Workflow
+      run: |
+        # Optionally trigger stage deployment if required
+        echo "Stage deployment will be triggered automatically."
